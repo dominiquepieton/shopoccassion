@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{product.slug}}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-5 rounded">
+           <img src="/uploads/{{product.illustration}}" alt="image {{product.name}}" class="shadow-lg mb-5 rounded img-fluid"/> 
+        </div>
+        <div class="col-md-7 my-auto">
+            <h3 class="text-center">{{product.name}}</h3>
+            <p class="text-center font-italic">{{ product.subtitle }}</p>
+            <span class="product-page-price">{{ (product.price / 100)|number_format(2, ',', '.') }}  €</span>
+            <hr class="w-50 mx-auto mb-3 bg-secondary">
+            <p>
+                {{product.description}}
+            </p>
+            <a href="{{path('add_to_cart', {id: product.id})}}" class="btn btn-outline-success">Ajouter au panier</a>
+        </div>
+    </div>
+{% endblock %}

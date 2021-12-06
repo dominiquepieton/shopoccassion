@@ -1,0 +1,58 @@
+/* general */
+body {
+    position: relative;
+}
+
+/* gestion de navbar */
+
+.navbar-item-custom, .navbar-item-custom a {
+    color: #fff;
+}
+
+/* gestion du footer */
+
+.footer-custom {
+    text-align: center;
+    position: fixed;
+    height: 50px;
+    bottom: 0;  
+    width: 100%;
+    background-color: #dfeaff;
+    padding-top: 15px;
+    
+}
+
+/* gestion du container des cards */
+
+.product-container {
+    margin-bottom: 125px;
+}
+
+
+/* gestion des cards product */
+
+.product-item h5 {
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-bottom : 1px;
+}
+
+.product-item .product-subtitle {
+    font-size: 13px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.product-item .product-price {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* gestion product single */
+
+.product-page-price {
+    font-size: 20px;
+    text-align: center;
+    display: block;
+    font-weight: bold;
+}
