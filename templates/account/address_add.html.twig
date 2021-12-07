@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'adresse{% endblock %}
+
+{% block body %}
+    <h1>Ajouter une adresse de livraison :</h1>
+    <p>Ajouter votre adresse de livraison afin de recevoir votre commande.</p>
+    
+    <hr class="w-75 mx-auto mt-3 mb-3 bg-secondary">
+    <a href="{{ path('account') }}">Retour à mon compte</a><br>
+
+    {#{% if notification %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <p class="text-center">{{notification}}</p>
+        </div>    
+    {% endif %}
+
+    {% if notificationError %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p class="text-center">{{notificationError}}</p>
+        </div>    
+    {% endif %}#}
+
+    {{form(form)}}
+{% endblock %}
