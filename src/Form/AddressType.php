@@ -4,10 +4,12 @@ namespace App\Form;
 
 use App\Entity\Address;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
 class AddressType extends AbstractType
 {
@@ -34,36 +36,37 @@ class AddressType extends AbstractType
             ])
             ->add('company', TextType::class, [
                 'label' => 'Votre entreprise',
+                'required' => false,
                 'attr' => [
-                'placeholder' => 'Entrez votre entreprise'
+                'placeholder' => 'facultatif(Entrez votre entreprise)'
                 ]
             ])
             ->add('address', TextType::class, [
-                'label' => 'Entrez votre adresse',
+                'label' => 'Votre adresse',
                 'attr' => [
-                'placeholder' => 'Entrez votre adresse'
+                'placeholder' => '8 rue des pensés'
                 ]
             ])
             ->add('postal', TextType::class, [
-                'label' => 'Entrez votre code postal',
+                'label' => 'Votre code postal',
                 'attr' => [
                 'placeholder' => 'Entrez votre code postal'
                 ]
             ])
             ->add('city', TextType::class, [
-                'label' => 'Entrez votre ville',
+                'label' => 'Votre ville',
                 'attr' => [
                 'placeholder' => 'Entrez votre ville'
                 ]
             ])
-            ->add('pays', TextType::class, [
-                'label' => 'Entrez votre pays',
+            ->add('pays', CountryType::class, [
+                'label' => 'Votre pays',
                 'attr' => [
                 'placeholder' => 'Entrez votre pays'
                 ]    
             ])
-            ->add('phone', TextType::class, [
-                'label' => 'Entrez votre téléphone',
+            ->add('phone', TelType::class, [
+                'label' => 'Votre téléphone',
                 'attr' => [
                 'placeholder' => 'Entrez votre téléphone'
                 ]
@@ -71,7 +74,7 @@ class AddressType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',
                 'attr' => [
-                    'class' => 'btn btn-outline-primary'
+                    'class' => 'btn-block btn-outline-primary'
                 ]
             ])
         ;
