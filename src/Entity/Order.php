@@ -39,7 +39,7 @@ class Order
     /**
      * @ORM\Column(type="float")
      */
-    private $czarrierPrice;
+    private $carrierPrice;
 
     /**
      * @ORM\Column(type="text")
@@ -50,6 +50,11 @@ class Order
      * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="myOrder")
      */
     private $orderDetails;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPaid;
 
     public function __construct()
     {
@@ -97,12 +102,12 @@ class Order
         return $this;
     }
 
-    public function getCzarrierPrice(): ?float
+    public function getCarrierPrice(): ?float
     {
         return $this->czarrierPrice;
     }
 
-    public function setCzarrierPrice(float $czarrierPrice): self
+    public function setCarrierPrice(float $czarrierPrice): self
     {
         $this->czarrierPrice = $czarrierPrice;
 
@@ -147,6 +152,18 @@ class Order
                 $orderDetail->setMyOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsPaid(): ?bool
+    {
+        return $this->isPaid;
+    }
+
+    public function setIsPaid(bool $isPaid): self
+    {
+        $this->isPaid = $isPaid;
 
         return $this;
     }

@@ -56,3 +56,20 @@ body {
     display: block;
     font-weight: bold;
 }
+
+
+/* gestion page recap commande */
+.form-check {
+    background-color: #f4f8ff;
+    padding: 20px 65px;
+}
+
+.col-form-label {
+    font-weight: bold;
+}
+
+.order-summary {
+    padding: 20px 65px;
+    background-color: #f4f8ff;
+    margin-top: 22px;
+}
