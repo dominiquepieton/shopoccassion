@@ -46,7 +46,8 @@ class OrderController extends AbstractController
 
 
     /**
-     * @Route("/commande/recapitulatif", name="order_recap")
+     * 
+     * @Route("/commande/recapitulatif", name="order_recap", methods={"POST"})
      */
     public function add(Cart $cart, Request $request): Response
     {
@@ -56,16 +57,16 @@ class OrderController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $date = new \DateTimeImmutable();
-            $carriers = $form->get('carriers')->getData();
+            $carrier = $form->get('carriers')->getData();
             $delivery = $form->get('addresses')->getData();
 
             // enregistrement de la commande order()
             $order = new Order();
             $order->setUser($this->getUser());
             $order->setCreatedAt($date);
-            $order->setCarrierName($carriers->getName());
-            $order->setCarrierPrice($carriers->getPrice());
-
+            $order->setCarrierName($carrier->getName());
+            $order->setCarrierPrice($carrier->getPrice());
+            
             $delivery_content = $delivery->getFirstname().' '.$delivery->getLastname();
             $delivery_content .= '<br/>'.$delivery->getPhone();
             if($delivery->getCompany())
@@ -92,15 +93,17 @@ class OrderController extends AbstractController
 
                 $this->entityManager->persist($orderDetails);
             }
+            $this->entityManager->flush();
 
-            //$this->entityManager->flush();
-
+            return $this->render('order/add.html.twig', [
+                'cart' => $cart->getAll(),
+                'carrier' => $carrier,
+                'delivery' => $delivery_content
+            ]);
 
         }
 
-        return $this->render('order/add.html.twig', [
-            'cart' => $cart->getAll(),
-            'carrier' => $carriers
-        ]);
+        return $this->redirectToRoute('cart');
+
     }
 }

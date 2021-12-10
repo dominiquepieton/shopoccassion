@@ -8,12 +8,20 @@
 <hr class="w-50 bg-secondary">
 <div class="row">
     <div class="col-md-6">
-        Mon adresse de livraison :<br />
-
-        Mon transporteur :
+        <strong>Mon adresse de livraison :</strong><br />
+        <div class="form-check">
+            {{delivery|raw}}
+        </div>
+        <hr class="bg-dark w-75">
+        <strong>Mon transporteur :</strong>
+        <div class="form-check">
+            {{carrier.name}}<br/>
+            {{carrier.description}}<br/>
+            <strong>{{carrier.price}} €</strong>
+        </div>
     </div>
     <div class="col-md-6 border border-dark">
-        <p class="text-center mt-3"><b>Récapitulatif de ma commande :</b></p>
+        <p class="text-center mt-3"><b>Ma commande :</b></p>
         <div class="order-summary">
         {% set total = null %}
         {% for key,c in cart %}
@@ -40,7 +48,7 @@
         <strong>Livraison : {{ (carrier.price)|number_format(2, ',', '.') }} €</strong>
         <hr>
         <strong>Total : {{ ((total / 100) + carrier.price)|number_format(2, ',', '.')}} €</strong></br>
-        <a href="" class="btn btn-success btn-block mt-5 mb-3">Payer ma commande</a>
+        <a href="" class="btn btn-success btn-block mt-5 mb-3">Payer | {{ ((total / 100) + carrier.price)|number_format(2, ',', '.')}}</a>
     </div>
 </div>
 {% endblock %}
