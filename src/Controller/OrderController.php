@@ -4,9 +4,8 @@ namespace App\Controller;
 
 use App\Classe\Cart;
 use App\Entity\Order;
-use App\Entity\OrderDetails;
-use DateTimeImmutable;
 use App\Form\OrderType;
+use App\Entity\OrderDetails;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,6 +61,8 @@ class OrderController extends AbstractController
 
             // enregistrement de la commande order()
             $order = new Order();
+            $reference = $date->format('dmY').'-'.uniqid();
+            $order->setReference($reference);
             $order->setUser($this->getUser());
             $order->setCreatedAt($date);
             $order->setCarrierName($carrier->getName());
@@ -93,12 +94,14 @@ class OrderController extends AbstractController
 
                 $this->entityManager->persist($orderDetails);
             }
+
             $this->entityManager->flush();
 
             return $this->render('order/add.html.twig', [
                 'cart' => $cart->getAll(),
                 'carrier' => $carrier,
-                'delivery' => $delivery_content
+                'delivery' => $delivery_content,
+                'reference' => $order->getReference()
             ]);
 
         }
