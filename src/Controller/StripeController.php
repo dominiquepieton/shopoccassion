@@ -32,7 +32,7 @@ class StripeController extends AbstractController
         }
 
         
-
+        // préparation du tableau de donnée pour stripe
         foreach($order->getOrderDetails()->getValues() as $obj)
         {
             $productObjet = $entityManager->getRepository(Product::class)->findOneByName($obj->getProduct());
@@ -49,6 +49,7 @@ class StripeController extends AbstractController
             ];
         }
 
+        // Ajout du livreur dans le tableau
         $products_for_stripe[] = [
             'price_data' => [
                 'currency' => 'eur',
@@ -61,6 +62,7 @@ class StripeController extends AbstractController
             'quantity' => 1,
         ];
 
+        // envoit des donnée à stripe
         Stripe::setApiKey('');
         $checkout_session = Session::create([
            'customer_email' => $this->getUser()->getEmail(),
@@ -69,9 +71,12 @@ class StripeController extends AbstractController
                $products_for_stripe
            ],
            'mode' => 'payment',
-           'success_url' => $YOUR_DOMAIN . '/success.html',
-           'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+           'success_url' => $YOUR_DOMAIN . '/commande/merci/{CHECKOUT_SESSION_ID}',
+           'cancel_url' => $YOUR_DOMAIN . '/commande/erreur/{CHECKOUT_SESSION_ID}',
         ]);
+
+        $order->setStripeSessionId($checkout_session->id);
+        $entityManager->flush();
 
         $response = new JsonResponse(['id' => $checkout_session->id]);
         return $response;
