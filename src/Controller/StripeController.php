@@ -53,7 +53,7 @@ class StripeController extends AbstractController
         $products_for_stripe[] = [
             'price_data' => [
                 'currency' => 'eur',
-                'unit_amount' => $order->getCarrierPrice() * 100,
+                'unit_amount' => $order->getCarrierPrice(),
                 'product_data' => [
                     'name' => $order->getCarrierName(),
                     'images' => [$YOUR_DOMAIN],
@@ -63,7 +63,7 @@ class StripeController extends AbstractController
         ];
 
         // envoit des donnée à stripe
-        Stripe::setApiKey('');
+        Stripe::setApiKey('sk_test_51K6AnoC2JcA4k8DjwiZfCvjAW7YcN0gtlINncPpGNJiEgjjEjuQxoGsKGtRNbpwzJNI8ivwRaWGiVARkyYzDidu900eW0c98gl');
         $checkout_session = Session::create([
            'customer_email' => $this->getUser()->getEmail(),
            'payment_method_types' => ['card'],
