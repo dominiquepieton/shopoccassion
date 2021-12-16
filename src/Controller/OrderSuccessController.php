@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
+use App\Classe\Mail;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,6 +42,13 @@ class OrderSuccessController extends AbstractController
             $order->setIsPaid(1);
             $this->entityManager->flush();
             // on envoit un mail de confirmation
+            // Partie envoie de mail avec mailJet
+            $email = new Mail();
+            $content = "Bonjour ".$order->getUser()->getFullName()."<br/>
+                        Bienvenue sur la boutique qui permet de donner une seconde vie à divers objet.<br/>
+                        Votre commande est validée par le centre de paiement. La préparation sera trés dans la journée.";
+
+            $email->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), "Votre commande chez ShopOccassion est bien validée", $content );
 
         }
 
