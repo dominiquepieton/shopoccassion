@@ -63,7 +63,7 @@ class StripeController extends AbstractController
         ];
 
         // envoit des donnée à stripe
-        Stripe::setApiKey('sk_test_51K6AnoC2JcA4k8DjwiZfCvjAW7YcN0gtlINncPpGNJiEgjjEjuQxoGsKGtRNbpwzJNI8ivwRaWGiVARkyYzDidu900eW0c98gl');
+        Stripe::setApiKey('stripe key');
         $checkout_session = Session::create([
            'customer_email' => $this->getUser()->getEmail(),
            'payment_method_types' => ['card'],

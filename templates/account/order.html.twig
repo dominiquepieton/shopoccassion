@@ -18,6 +18,7 @@
   <thead>
     <tr>
       <th scope="col">Référence :</th>
+      <th scope="col">status :</th>
       <th scope="col">Passé le :</th>
       <th scope="col">Produit(s)</th>
       <th scope="col">Total de la commande</th>
@@ -27,13 +28,23 @@
   <tbody>
     {% for order in orders %}
     <tr>
-      <td><span class="badge badge-secondary">{{order.reference}}</span></td>  
+      <td><span class="badge badge-secondary">{{order.reference}}</span></td>
+      <td>
+          {% if order.state == 1 %} 
+              <span class="badge badge-info">Commande Validée</span>   
+          {% elseif order.state == 2 %}
+              <span class="badge badge-primary">Prépartion en cours</span>
+          {% elseif order.state == 3 %}
+              <span class="badge badge-success">Livraison en cours</span>
+          {% endif %}
+      
+      </td>  
       <td>{{order.createdAt|date('d-m-Y')}}</td>
       <td>{{order.orderDetails|length}}</td>
       <td>{{((order.total + order.carrierPrice) / 100)|number_format(2,',','.')}}</td>
       <td><a href="{{ path('account_order_show', {'reference' : order.reference}) }}" class=""><i class="far fa-eye fa-lg"></i></a></td>
     </tr>
-    {% endfor %}
+  {% endfor %}
   </tbody>
 </table>
     {% endif %}

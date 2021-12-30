@@ -8,6 +8,14 @@
     <hr>
     <strong>Commande passée le :</strong> {{order.createdAt|date('d-m-Y')}}<br/>
     <strong>Référence de la commande :</strong> {{order.reference}}<br/>
+    <strong>Status de ma commande :</strong> 
+        {% if order.state == 1 %} 
+              <span class="badge badge-info">Commande Validée</span><br/>   
+          {% elseif order.state == 2 %}
+              <span class="badge badge-primary">Prépartion en cours</span><br/>
+          {% elseif order.state == 3 %}
+              <span class="badge badge-success">Livraison en cours</span><br/>
+          {% endif %}
     <strong>Transporteur choisi :</strong> {{order.carrierName}}<br/>
     <hr>
     <strong>Détails :</strong>

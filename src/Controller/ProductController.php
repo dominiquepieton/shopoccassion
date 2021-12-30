@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Search;
+use App\Entity\Product;
 use App\Form\SearchType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -53,6 +54,7 @@ class ProductController extends AbstractController
     public function show($slug): Response
     {
         $product = $this->productRepository->findOneBySlug($slug);
+        $products = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
         
         if(!$product)
         {
@@ -60,7 +62,8 @@ class ProductController extends AbstractController
         }
         
         return $this->render('product/show.html.twig', [
-            'product' => $product 
+            'product' => $product,
+            'products' => $products 
         ]);
     }
 }

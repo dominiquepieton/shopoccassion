@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous-contacter{% endblock %}
+
+{% block body %}
+<div class="w-75 mx-auto mb-5">
+    <h2>Nous-contacter :</h2>
+    <a href="{{ path('home')}}">Retour à l'accueil</a>
+    <hr class="bg-secondary">
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-info">
+            {{message}}
+        </div>
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-8">
+            {{form(form)}}
+        </div>
+        <div class="col-md-4">
+            <h4 class="text-center">ShopOccassion </h4>
+            <hr class="w-25 bg-secondary mx-auto">
+            <p class="text-center">70 rue de la brocante</p>
+            <p class="text-center">69258 Louis la brocante</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

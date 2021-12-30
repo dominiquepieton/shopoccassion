@@ -79,7 +79,7 @@ class OrderController extends AbstractController
             $delivery_content .= '<br/>'.$delivery->getPays();
 
             $order->setDelivery($delivery_content);
-            $order->setIsPaid(0);
+            $order->setState(0); // non valider
             $this->entityManager->persist($order);
 
             // enregistrement des produits orderDetails()

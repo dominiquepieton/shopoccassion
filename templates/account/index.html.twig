@@ -4,10 +4,20 @@
 
 {% block body %}
     <h1>Mon compte :</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+    -<a href="/admin">Vous êtes Administrateur, accéder au back-office</a><br>
+    {% endif %}
     <p>Bienvenue {{ app.user.firstname }}  {{ app.user.lastname }} dans votre compte. Cette page est fais pour que vous puissiez gérer toutes vos informations personnelles.</p>
     <hr class="w-75 mx-auto mt-3 mb-3 bg-secondary">
-
-    -<a href="{{ path('account_password') }}"> Modifier mon password</a><br>
-    -<a href="{{ path('account_address') }}"> Ajouter des adresses de livraison</a><br>
-    -<a href="{{ path('account_order') }}"> Mes commandes</a><br>
+    <div class="row">
+        <div class="col-md-3 bg-info mr-3">
+            <a href="{{ path('account_password') }}" class="nav-link text-dark">Modification du password</a>
+        </div>
+        <div class="col-md-3 bg-success mr-3">
+            <a href="{{ path('account_address') }}" class="nav-link text-dark"> Ajouter des adresses de livraison</a>
+        </div>
+        <div class="col-md-3 bg-warning">
+            <a href="{{ path('account_order') }}" class="nav-link text-dark"> Mes commandes</a>
+        </div>
+    </div>
 {% endblock %}
